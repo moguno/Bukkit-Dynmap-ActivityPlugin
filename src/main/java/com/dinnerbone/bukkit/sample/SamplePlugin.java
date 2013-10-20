@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Level;
 
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
@@ -16,11 +17,15 @@ import org.bukkit.event.block.BlockCanBuildEvent;
 import org.bukkit.event.block.BlockPhysicsEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityExplodeEvent;
+import org.bukkit.event.player.PlayerEggThrowEvent;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.dynmap.DynmapAPI;
+import org.dynmap.markers.Marker;
+import org.dynmap.markers.MarkerSet;
 
 /**
  * Sample plugin for Bukkit
@@ -51,6 +56,16 @@ public class SamplePlugin extends JavaPlugin {
             } else if (event instanceof EntityDamageEvent) {
                 EntityDamageEventFilter.filter(event);
             }
+        }
+
+        @EventHandler
+        public void onEntityExplode(EntityExplodeEvent event) {
+            EntityExplodeEventFilter.filter(event);
+        }
+
+        @EventHandler
+        public void onPlayerEggThrow(PlayerEggThrowEvent event) {
+            PlayerEggThrowEventFilter.filter(event);
         }
     }
 
@@ -134,7 +149,10 @@ public class SamplePlugin extends JavaPlugin {
 
         EntityDamageByEntityEventFilter.add(EntityType.PLAYER.getTypeId(), -1, null, new LowPrioActivity("何かと戦っています。"));
 
-        EntityDamageByEntityEventFilter.add(EntityType.CREEPER.getTypeId(), EntityType.PLAYER.getTypeId(), EntityDamageEvent.DamageCause.ENTITY_EXPLOSION, new LowPrioActivity("匠が爆発！"));
+        EntityExplodeEventFilter.add(EntityType.CREEPER.getTypeId(), new LowPrioActivity("匠がバクハツ！！！>_<"));
+
+        PlayerEggThrowEventFilter.add(new LowPrioActivity("ヒヨコが生まれました。ビッグダディ！"));
+        PlayerEggThrowEventFilter.setDefaultActivity(new LowPrioActivity("卵を投げています。"));
 
         EntityDamageEventFilter.add(EntityDamageEvent.DamageCause.FALL, new LowPrioActivity("足をくじきました・・・。"));
     }
