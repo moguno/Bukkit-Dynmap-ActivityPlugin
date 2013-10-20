@@ -21,6 +21,11 @@
       <type>jar</type>
       <scope>compile</scope>
     </dependency>
+    <dependency>
+      <groupId>org.dynmap</groupId>
+      <artifactId>dynmap-api</artifactId>
+      <version>1.0</version>
+    </dependency>
   </dependencies>
 
   <build>
