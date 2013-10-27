@@ -1,5 +1,6 @@
-package com.dinnerbone.bukkit.sample;
+package jp.ddo.araaraufufu.bukkit.dynmap.activity;
 
+import jp.ddo.araaraufufu.bukkit.dynmap.activity.Activity;
 import org.bukkit.entity.Player;
 import org.dynmap.DynmapAPI;
 

@@ -1,4 +1,4 @@
-package com.dinnerbone.bukkit.sample;
+package jp.ddo.araaraufufu.bukkit.dynmap.activity;
 
 import org.bukkit.event.block.BlockBreakEvent;
 

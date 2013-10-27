@@ -1,20 +1,13 @@
 
-package com.dinnerbone.bukkit.sample;
+package jp.ddo.araaraufufu.bukkit.dynmap.activity;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Level;
 
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.block.Block;
-import org.bukkit.block.BlockFace;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.block.BlockCanBuildEvent;
-import org.bukkit.event.block.BlockPhysicsEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
@@ -24,15 +17,13 @@ import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.dynmap.DynmapAPI;
-import org.dynmap.markers.Marker;
-import org.dynmap.markers.MarkerSet;
 
 /**
  * Sample plugin for Bukkit
  *
  * @author Dinnerbone
  */
-public class SamplePlugin extends JavaPlugin {
+public class ActivityPlugin extends JavaPlugin {
     private final SampleBlockListener blockListener = new SampleBlockListener();
     private final HashMap<Player, Boolean> debugees = new HashMap<Player, Boolean>();
     private DynmapAPI api;
@@ -72,7 +63,7 @@ public class SamplePlugin extends JavaPlugin {
     private class Chat implements Runnable {
         public void run() {
             if(!stop) {
-                getServer().getScheduler().scheduleSyncDelayedTask(SamplePlugin.this, new Chat(), 5);
+                getServer().getScheduler().scheduleSyncDelayedTask(ActivityPlugin.this, new Chat(), 5);
             }
         }
     }
