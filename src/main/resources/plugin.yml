@@ -1,3 +1,3 @@
-name: Sample Plugin
-main: com.dinnerbone.bukkit.sample.SamplePlugin
+name: Dynmap Activity Plugin
+main: jp.ddo.araaraufufu.bukkit.dynmap.activity.ActivityPlugin
 version: ${version}

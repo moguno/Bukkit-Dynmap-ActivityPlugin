@@ -51,7 +51,7 @@ public class EntityDamageByEntityEventFilter {
             }
         }
 
-        if (defaultActivity != null) {
+        if (defaultActivity != null && event.getDamager() instanceof Player) {
             defaultActivity.fire((Player)event.getDamager());
         }
     }

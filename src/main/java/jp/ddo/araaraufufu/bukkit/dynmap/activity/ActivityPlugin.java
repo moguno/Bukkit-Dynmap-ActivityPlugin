@@ -8,9 +8,7 @@ import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.entity.EntityExplodeEvent;
+import org.bukkit.event.entity.*;
 import org.bukkit.event.player.PlayerEggThrowEvent;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
@@ -57,6 +55,18 @@ public class ActivityPlugin extends JavaPlugin {
         @EventHandler
         public void onPlayerEggThrow(PlayerEggThrowEvent event) {
             PlayerEggThrowEventFilter.filter(event);
+        }
+
+        @EventHandler
+        public void onEntityDeath(EntityDeathEvent event) {
+            if (event instanceof PlayerDeathEvent) {
+                PlayerDeathEventFilter.filter((PlayerDeathEvent)event);
+            }
+        }
+
+        @EventHandler
+        public void onCreatureSpawn(CreatureSpawnEvent event) {
+            CreatureSpawnEventFilter.filter(event);
         }
     }
 
@@ -145,7 +155,14 @@ public class ActivityPlugin extends JavaPlugin {
         PlayerEggThrowEventFilter.add(new LowPrioActivity("ヒヨコが生まれました。ビッグダディ！"));
         PlayerEggThrowEventFilter.setDefaultActivity(new LowPrioActivity("卵を投げています。"));
 
+        PlayerDeathEventFilter.add(new LowPrioActivity("死んでしまいました・・・。"));
+
         EntityDamageEventFilter.add(EntityDamageEvent.DamageCause.FALL, new LowPrioActivity("足をくじきました・・・。"));
+
+        CreatureSpawnEventFilter.add(EntityType.CHICKEN.getTypeId(), CreatureSpawnEvent.SpawnReason.BREEDING, new LowPrioActivity("ヒヨコが生まれました。"));
+        CreatureSpawnEventFilter.add(EntityType.COW.getTypeId(), CreatureSpawnEvent.SpawnReason.BREEDING, new LowPrioActivity("子牛が生まれました。"));
+        CreatureSpawnEventFilter.add(EntityType.PIG.getTypeId(), CreatureSpawnEvent.SpawnReason.BREEDING, new LowPrioActivity("子ブタが生まれました。"));
+        CreatureSpawnEventFilter.add(EntityType.SHEEP.getTypeId(), CreatureSpawnEvent.SpawnReason.BREEDING, new LowPrioActivity("子羊が生まれました。"));
     }
 
     public boolean isDebugging(final Player player) {

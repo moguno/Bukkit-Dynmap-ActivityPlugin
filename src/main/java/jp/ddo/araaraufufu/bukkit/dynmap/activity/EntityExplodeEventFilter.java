@@ -48,8 +48,6 @@ public class EntityExplodeEventFilter {
     }
 
     protected static void filter(EntityExplodeEvent event) {
-        boolean result = false;
-
         for (EntityExplodeEventFilter filter : filterList) {
 
             if (filter.doFilter(event)) {
